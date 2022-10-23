@@ -1,12 +1,3 @@
-<?php
-
-session_start();
-include 'db_connect.php';
-$conn = new mysqli('db403-mysql', 'root', 'P@ssw0rd', 'northwind');
-if ($conn->connect_errno) {
-    die($conn->connect_error);
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +7,36 @@ if ($conn->connect_errno) {
   <title>Products</title>
 </head>
 <body>
+  <?php
+  $sever="localhost";
+  $user="root";
+  $pass="P@ssw0rd";
+  $db="select";
+
+  $con =new mysql($sever,$user,$pass,$db);
+
+  if($con->connect_error){
+    die(Connection failed : ".$con->connect_error);
+  }
+  $con->set_charset("utf8");
+
+
+  $sql="SELECT * FROM db_connect.php"
+  $result =$con->query($sql);
+
+  if($result->num_rows>0){
+    while($row=$result->fetch_assoc()){
+
+      echo $row["CategoryID"]."."." ไอดี : ".$row["CategoryName"]." ".$row["categories"]." <br>";
+    }
+  }else{
+    echo "0 row";
+  }
+
+  ?>
+
+
+
   <table>
     <tr>
       <th>Product name</th>
